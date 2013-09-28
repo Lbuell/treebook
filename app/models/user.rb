@@ -1,19 +1,28 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me,
+                  :first_name, :last_name, :profile_name
   
- class ApplicationController < ActionController::Base
-    before_filter :configure_permitted_parameters, if: :devise_controller?
+  validates :first_name, presence: true
 
-    protect_from_forgery with: :exception
+  validates :last_name, presence: true
 
-    protected
+  validates :profile_name, presence: true,
+                           uniqueness: true,
+                           format: {
+                             with: /a-zA-Z0-9_-/,
+                             message: 'Must be formatted correctly.'
+                           }
 
-    def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :profile_name, 
-                                                                                          :email, :password, :password_confirmation) }
-    end
-end
+  has_many :statuses
+
+  def full_name
+  	first_name + " " + last_name
+  end
 end
