@@ -8,7 +8,8 @@ Devise.setup do |config|
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
-
+  config.secret_key = '9925ed2dd86b2a6207888081b1b4a52cd17c013f346dfbb59dd71b27a
+99eb099de14f664176fd14d3a105da1abd05113ac97fda747781f8c4806b5bf3d2c589c'
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
@@ -162,8 +163,6 @@ Devise.setup do |config|
   # change their passwords.
   config.reset_password_within = 6.hours
 
-  config.secret_key = '8b83507d7648d43b2167c9cf957916e6ac8f44b092a137d8dce28be06
-8171b6fbc4847b8cf31f7e46b1d77f808bbdb142515f9200a8d6e30d4486344fdab2da8'
   # ==> Configuration for :encryptable
   # Allow you to use another encryption algorithm besides bcrypt (default). You can use
   # :sha1, :sha512 or encryptors from others authentication tools as :clearance_sha1,
